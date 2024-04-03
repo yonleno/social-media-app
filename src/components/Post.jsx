@@ -4,12 +4,20 @@ import Comment from './Comment';
 function Post(props){
 
     const [likes, setLikes] = useState(0);
+    const [comments, setComments] = useState([]);
+    const [commentText, setCommentText] = useState("");
+
+    let handleCommentSubmit = (event) => {
+        event.preventDefault();
+       const newComment = {content: commentText}
+       setComments([...comments, newComment])
+       setCommentInput("")    
+    }
 
     function handleLike(){
         setLikes(likes + 1);
 
         }
-        
 
     return(
         <div>
@@ -18,9 +26,15 @@ function Post(props){
             <p>Likes: {likes}</p>
             <button onClick={handleLike}>Like</button>
             <p>Comments:</p>
-            <Comment content="This is a test comment!" />
-            <Comment content="This is another test comment!" />
-            <Comment content="This is yet another test comment!" />
+            {comments.map(comment => (
+                <Comment content={comment.content} />
+            )
+            )
+            }
+            <form onSubmit={handleCommentSubmit}>
+                <input type="text" onChange={(event) => setCommentText(event.target.value)} value={commentText} />
+                <button type="submit">Post</button>
+            </form>
 
         </div>
 
