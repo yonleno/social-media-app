@@ -1,7 +1,17 @@
 import React from 'react';
 import Post from './components/Post';
+import './App.css';
+import CreatePostForm from './components/CreatePostForm';
+import { useState } from 'react';
+import Feed from './components/Feed';
 
 function App(){
+
+  const [postForm, setPostForm] = useState([])
+
+  let handleNewSubmission = (data) => {
+    setPostForm([...postForm, data])
+  }
 
   return(
 
@@ -10,13 +20,9 @@ function App(){
   <h1>Fakebook!</h1>
 
 
-  {/* CreatePostForm */}
+ <CreatePostForm onNewSubmit ={handleNewSubmission} />
 
-  {/* Feed */}
-
-  <Post content="This is a test post!" />
-  
-  <Post content="This is another test post!" />
+  <Feed post={postForm}/>
 
   </div>
 

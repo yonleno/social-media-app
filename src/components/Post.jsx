@@ -13,6 +13,7 @@ function Post(props){
 
     return(
         <div>
+            <h1>{props.title}</h1>
             <h3>{props.content}</h3>
             <p>Likes: {likes}</p>
             <button onClick={handleLike}>Like</button>
